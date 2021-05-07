@@ -1,0 +1,17 @@
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ul li {
+  list-style: none;
+}
+
+.over {
+  background-color: red;
+}
+
+.during {
+  background-color: yellow;
+}

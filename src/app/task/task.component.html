@@ -1,0 +1,42 @@
+<section>
+  <div class="card bg-light  shadow mt-5 p-5 w-100">
+    <h1 [ngStyle]="{color:'grey'}" class="mb-5">Listes de tâches à faire</h1>
+    <ul>
+      <li>- {{ day | date: 'dd/MM/yyyy'}}</li>
+      <li>- {{ day | date: 'short' }}</li>
+      <li>- {{ day | date: 'medium' }}</li>
+      <li>- {{ day | date: 'long' }}</li>
+      <li>- {{ day | date: 'full' | uppercase }}</li>
+
+    </ul>
+    <ul class="text-left">
+      <li class="p-5 border-bottom shadow bg-light m-0" *ngFor="let task of tasks, let i = index">
+        <h2>{{ task.taskName | uppercase }}</h2>
+
+        <div class="d-flex justify-content-between align-items-center"
+             [ngClass]='{"bg-danger":task.taskStatus,"bg-success":!task.taskStatus}'>
+          <a [href]="task.image">
+            <img class="w-auto" [src]="task.image">
+          </a>
+
+          <div>
+            <button class="btn btn-warning m-1" [disabled]="task.taskStatus" (click)='onChangeStatus(i)'>En cours
+            </button>
+            <button class="btn btn-primary m-1" [disabled]="!task.taskStatus" (click)='onChangeStatus(i)'>Terminer
+            </button>
+
+            <button class="btn btn-danger m-1 mr-5" (click)='onChangeUpdated(i)' *ngIf="!task.isUpdated">Modifier
+            </button>
+            <button class="btn btn-light" (click)='onChangeUpdated(i)' *ngIf="task.isUpdated">Modification terminée
+            </button>
+            <button class="btn btn-light" (click)='onView(i)'>En savoir plus</button>
+
+
+          </div>
+          <input *ngIf="task.isUpdated" type="text" class="form-control" [(ngModel)]="task.taskName">
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</section>
